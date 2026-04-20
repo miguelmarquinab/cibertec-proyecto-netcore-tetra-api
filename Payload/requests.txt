@@ -1,0 +1,256 @@
+﻿
+
+## https://localhost:7132/swagger/index.html
+
+
+8. Endpoints que tendrás en Swagger
+
+Cuando ejecutes, tendrás estos endpoints:
+
+Listar radios
+GET /api/radios
+Buscar radios
+GET /api/radios?texto=Motorola
+Obtener por id
+GET /api/radios/1
+Listar modelos
+GET /api/radios/modelos
+Listar estados
+GET /api/radios/estados
+Registrar radio
+POST /api/radios
+
+Body:
+
+{
+  "mod_id": 1,
+  "esr_id": 1,
+  "serie": "SERIE-0001",
+  "fecha_ingreso": "2026-04-19T00:00:00",
+  "rad_activo": true
+}
+Actualizar radio
+PUT /api/radios/1
+
+Body:
+
+{
+  "mod_id": 2,
+  "esr_id": 2,
+  "serie": "SERIE-0001-ACT",
+  "fecha_ingreso": "2026-04-19T00:00:00",
+  "rad_activo": true
+}
+Eliminar radio
+DELETE /api/radios/1
+
+*------------ CONTRATOS --------------------------------------
+
+
+GET /api/contratos
+GET /api/contratos?clienteId=1
+GET /api/contratos?estado=ACTIVO
+GET /api/contratos?fechaInicio=2026-01-01&fechaFin=2026-12-31
+GET /api/contratos/1
+POST /api/contratos
+PUT /api/contratos/1
+DELETE /api/contratos/1
+
+Body para registrar
+
+{
+  "cli_id": 1,
+  "con_numero": "CON-2026-003",
+  "con_fechaInicio": "2026-05-01T00:00:00",
+  "con_fechaFin": "2026-12-31T00:00:00",
+  "con_estado": "ACTIVO",
+  "con_tipoContrato": "ANUAL",
+  "con_valorTotal": 8400.00,
+  "con_valorMensual": 700.00,
+  "con_observaciones": "Contrato generado desde API",
+  "usa_id": 1
+}
+
+Body para actualizar
+
+{
+  "cli_id": 1,
+  "con_numero": "CON-2026-003-EDIT",
+  "con_fechaInicio": "2026-05-01T00:00:00",
+  "con_fechaFin": "2026-12-31T00:00:00",
+  "con_estado": "ACTIVO",
+  "con_tipoContrato": "ANUAL",
+  "con_valorTotal": 9000.00,
+  "con_valorMensual": 750.00,
+  "con_observaciones": "Contrato actualizado desde API",
+  "usa_id": 1
+}
+
+8) Pruebas rápidas en SQL Server
+
+EXEC dbo.usp_Buscar_Contratos
+    @cliente_id = 0,
+    @estado = '',
+    @fecha_inicio = '',
+    @fecha_fin = '';
+
+EXEC dbo.usp_contrato_obtener
+    @p_con_id = 1;
+
+EXEC dbo.usp_contrato_guardar
+    @p_con_id = 0,
+    @p_cli_id = 1,
+    @p_con_numero = 'CON-2026-010',
+    @p_con_fechaInicio = '2026-06-01',
+    @p_con_fechaFin = '2026-12-31',
+    @p_con_estado = 'ACTIVO',
+    @p_con_tipoContrato = 'ANUAL',
+    @p_con_valorTotal = 15000.00,
+    @p_con_valorMensual = 1250.00,
+    @p_con_observaciones = 'Alta de prueba',
+    @p_usa_id = 1;
+
+EXEC dbo.usp_contrato_guardar
+    @p_con_id = 1,
+    @p_cli_id = 1,
+    @p_con_numero = 'CON-2026-001-EDIT',
+    @p_con_fechaInicio = '2026-01-01',
+    @p_con_fechaFin = '2026-12-31',
+    @p_con_estado = 'ACTIVO',
+    @p_con_tipoContrato = 'ANUAL',
+    @p_con_valorTotal = 13000.00,
+    @p_con_valorMensual = 1083.33,
+    @p_con_observaciones = 'Actualización de prueba',
+    @p_usa_id = 1;
+
+EXEC dbo.usp_contrato_eliminar_logico
+    @p_con_id = 2;
+
+
+    ---- DETALLE CONTRATO ----
+GET    /api/detallecontratos/contrato/1
+GET    /api/detallecontratos/1
+POST   /api/detallecontratos
+PUT    /api/detallecontratos/1
+DELETE /api/detallecontratos/1
+
+
+Body para registrar
+{
+  "con_id": 1,
+  "mod_id": 1,
+  "dec_cantidad": 4,
+  "dec_precioUnitario": 220.00,
+  "usa_id": 1
+}
+
+
+Body para actualizar
+{
+  "con_id": 1,
+  "mod_id": 2,
+  "dec_cantidad": 6,
+  "dec_precioUnitario": 250.00,
+  "usa_id": 1
+}
+
+8) Pruebas rápidas en SQL Server
+EXEC dbo.usp_detalleContrato_listar_por_contrato
+    @p_con_id = 1;
+
+EXEC dbo.usp_detalleContrato_obtener
+    @p_dec_id = 1;
+
+EXEC dbo.usp_detalleContrato_guardar
+    @p_dec_id = 0,
+    @p_con_id = 1,
+    @p_mod_id = 1,
+    @p_dec_cantidad = 8,
+    @p_dec_precioUnitario = 230.00,
+    @p_usa_id = 1;
+
+EXEC dbo.usp_detalleContrato_guardar
+    @p_dec_id = 1,
+    @p_con_id = 1,
+    @p_mod_id = 2,
+    @p_dec_cantidad = 10,
+    @p_dec_precioUnitario = 260.00,
+    @p_usa_id = 1;
+
+EXEC dbo.usp_detalleContrato_eliminar_logico
+    @p_dec_id = 2;
+
+
+
+    ----*******
+    ASIGNACION
+
+    GET    /api/asignacionradios/detalle/1
+GET    /api/asignacionradios/1
+GET    /api/asignacionradios/disponibles/modelo/1
+POST   /api/asignacionradios
+PUT    /api/asignacionradios/1
+PUT    /api/asignacionradios/devolver/1
+DELETE /api/asignacionradios/1
+
+Body para registrar asignación
+{
+  "dec_id": 1,
+  "rad_id": 1,
+  "asr_fechaAsignacion": "2026-04-20T00:00:00",
+  "asr_observacionesAsignacion": "Asignado para pruebas desde API",
+  "usa_id": 1
+}
+
+
+Body para actualizar asignación
+
+{
+  "dec_id": 1,
+  "rad_id": 3,
+  "asr_fechaAsignacion": "2026-04-20T00:00:00",
+  "asr_observacionesAsignacion": "Reasignación del equipo",
+  "usa_id": 1
+}
+
+Body para devolución
+
+{
+  "asr_fechaDevolucion": "2026-04-30T00:00:00",
+  "asr_observacionesDevolucion": "Equipo devuelto en buen estado"
+}
+
+8) Pruebas rápidas en SQL Server
+
+EXEC dbo.usp_asignacionRadio_listar_por_detalle
+    @p_dec_id = 1;
+
+EXEC dbo.usp_asignacionRadio_obtener
+    @p_asr_id = 1;
+
+EXEC dbo.usp_radio_disponibles_por_modelo
+    @p_mod_id = 1;
+
+EXEC dbo.usp_asignacionRadio_guardar
+    @p_asr_id = 0,
+    @p_dec_id = 1,
+    @p_rad_id = 1,
+    @p_asr_fechaAsignacion = '2026-04-20',
+    @p_asr_observacionesAsignacion = 'Asignación de prueba',
+    @p_usa_id = 1;
+
+EXEC dbo.usp_asignacionRadio_devolver
+    @p_asr_id = 1,
+    @p_asr_fechaDevolucion = '2026-04-30',
+    @p_asr_observacionesDevolucion = 'Devolución de prueba';
+
+EXEC dbo.usp_asignacionRadio_eliminar_logico
+    @p_asr_id = 1;
+
+
+    9) Observación importante
+
+Tu tabla asignacionRadios define asr_id como INT PRIMARY KEY, pero no es identity en el script. Por eso, en el SP de guardado usé:
+
+SELECT @nuevoId = ISNULL(MAX(asr_id), 0) + 1
+FROM dbo.asignacionRadios;
