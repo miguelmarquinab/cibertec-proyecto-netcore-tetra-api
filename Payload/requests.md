@@ -3,9 +3,9 @@
 ## https://localhost:7132/swagger/index.html
 
 
-8. Endpoints que tendrás en Swagger
+## 8. Endpoints que tendrás en Swagger
 
-Cuando ejecutes, tendrás estos endpoints:
+### Cuando ejecutes, tendrás estos endpoints:
 
 Listar radios
 GET /api/radios
@@ -20,7 +20,7 @@ GET /api/radios/estados
 Registrar radio
 POST /api/radios
 
-Body:
+##Body:
 
 {
   "mod_id": 1,
@@ -56,7 +56,7 @@ POST /api/contratos
 PUT /api/contratos/1
 DELETE /api/contratos/1
 
-Body para registrar
+## Body para registrar
 
 {
   "cli_id": 1,
@@ -250,7 +250,7 @@ EXEC dbo.usp_asignacionRadio_eliminar_logico
 
     9) Observación importante
 
-Tu tabla asignacionRadios define asr_id como INT PRIMARY KEY, pero no es identity en el script. Por eso, en el SP de guardado usé:
+## Tu tabla asignacionRadios define asr_id como INT PRIMARY KEY, pero no es identity en el script. Por eso, en el SP de guardado usé:
 
 SELECT @nuevoId = ISNULL(MAX(asr_id), 0) + 1
 FROM dbo.asignacionRadios;

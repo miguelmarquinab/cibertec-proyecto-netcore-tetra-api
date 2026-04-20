@@ -43,7 +43,6 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Repositories
                     con_numero = dr["con_numero"]?.ToString()
                 });
             }
-
             return lista;
         }
 
@@ -76,7 +75,6 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Repositories
                     con_numero = dr["con_numero"]?.ToString()
                 };
             }
-
             return item;
         }
 
@@ -95,7 +93,6 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Repositories
 
             await cn.OpenAsync();
             object? result = await cmd.ExecuteScalarAsync();
-
             return result == null ? 0 : Convert.ToInt32(result);
         }
 

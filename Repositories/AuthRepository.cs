@@ -7,7 +7,6 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Repositories
 {
     public class AuthRepository : IAuthRepository
     {
-
         private readonly string _connectionString;
 
         public AuthRepository(IConfiguration configuration)
@@ -44,7 +43,6 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Repositories
                     rol_nombre = dr["rol_nombre"]?.ToString()
                 };
             }
-
             return item;
         }
     }

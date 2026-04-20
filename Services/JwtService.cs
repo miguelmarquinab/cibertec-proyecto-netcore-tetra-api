@@ -54,7 +54,6 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Services
                 ),
                 signingCredentials: credentials
             );
-
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }

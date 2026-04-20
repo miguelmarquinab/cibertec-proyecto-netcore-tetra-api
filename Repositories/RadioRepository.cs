@@ -39,7 +39,6 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Repositories
                     rad_activo = dr["rad_activo"] == DBNull.Value ? null : Convert.ToBoolean(dr["rad_activo"])
                 });
             }
-
             return lista;
         }
 
@@ -70,7 +69,6 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Repositories
                     estado = dr["estado"]?.ToString() ?? ""
                 };
             }
-
             return item;
         }
 
@@ -126,7 +124,6 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Repositories
                     descripcion = dr["mod_descripcion"]?.ToString() ?? ""
                 });
             }
-
             return lista;
         }
 

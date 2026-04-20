@@ -9,7 +9,6 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Repositories
     {
         private readonly string _connectionString;
 
-
         public ContratoRepository(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("cn")!;
@@ -50,14 +49,12 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Repositories
                     cli_razonSocial = dr["cli_razonSocial"]?.ToString() ?? string.Empty
                 });
             }
-
             return lista;
         }
 
         public async Task<ContratoResponse?> ObtenerAsync(int conId)
         {
             ContratoResponse? item = null;
-
             using SqlConnection cn = new SqlConnection(_connectionString);
             using SqlCommand cmd = new SqlCommand("dbo.usp_contrato_obtener", cn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -86,7 +83,6 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Repositories
                     cli_razonSocial = dr["cli_razonSocial"]?.ToString()
                 };
             }
-
             return item;
         }
 
@@ -127,11 +123,5 @@ namespace ApiSsistemaGestionInventarioRadiosTetra.Repositories
             int filas = result == null ? 0 : Convert.ToInt32(result);
             return filas > 0;
         }
-
-
     }
-
-
-
-
 }
